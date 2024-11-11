@@ -1,9 +1,15 @@
 import { Text, View, StyleSheet, TouchableOpacity, TextInput } from "react-native";
 import Google from '../assets/images/google';
-
+import Eye from '../assets/images/eyeSlash';
+import { useState } from 'react'
+import { Link } from "expo-router";
+import Shape from '../assets/images/shape'
 
 
 export default function LogIn() {
+
+    const [flag, setFlag] = useState(false)
+
     return <>
         <View style={styles.wrapper}>
             <Text style={styles.title}>Log In</Text>
@@ -21,6 +27,26 @@ export default function LogIn() {
                 <Text style={styles.text_inp}>Email Addess</Text>
                 <TextInput style={styles.inp} placeholder={'Rhebhek@gmail.com'} placeholderTextColor={'#BABABA'}></TextInput>
             </View>
+            <View style={styles.inp_wrapper}>
+                <View style={styles.text_block}>
+                    <Text style={styles.text_inp}>Password</Text>
+                    <Text style={styles.text_pwd}>Forgot Password</Text>
+                </View>
+                <TextInput style={styles.inp} placeholder='Password' secureTextEntry={true} placeholderTextColor={'#BABABA'}></TextInput>
+                <View style={styles.containerCheckbox}>
+                <TouchableOpacity onPress={() => setFlag(!flag)} style={styles.checkbox}>
+                    {flag ? <Shape style={styles.checkboxChecked}></Shape> : <View style={styles.checkboxUnchecked} />}
+                </TouchableOpacity>
+                <Text style={styles.label}>Keep me signed in</Text>
+            </View>
+                <TouchableOpacity style={styles.login_btn}>
+                    <Text style={styles.login_text}>Login</Text>
+                </TouchableOpacity>
+            </View>
+            <View style={styles.link_container}>
+            <Text style={styles.link_text}>Don’t have an Account?</Text>
+            <Link href={'/signup'}><Text style={styles.link_text_blue}>Sign up here</Text></Link>
+            </View>
         </View>
     </>
 }
@@ -28,7 +54,7 @@ export default function LogIn() {
 
 const styles = StyleSheet.create({
     wrapper: {
-        backgroundColor: '#fffff',
+        backgroundColor: '#ffffff',
         flex: 1,
         alignItems: 'center',
         paddingHorizontal: 28,
@@ -79,8 +105,8 @@ const styles = StyleSheet.create({
     },
     inp_wrapper: {
         justifyContent: 'flex-start',
-        width:'100%',
-        gap:4,
+        width: '100%',
+        gap: 4,
     },
     text_inp: {
         fontFamily: 'SF Pro Display',
@@ -94,7 +120,79 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderStyle: 'solid',
         width: '100%',
-        padding:12,
-        borderRadius:6,
+        padding: 12,
+        borderRadius: 6,
+    },
+    text_block: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginTop: 20,
+    },
+    text_pwd: {
+        fontFamily: 'SF Pro Display',
+        fontSize: 14,
+        fontWeight: 400,
+        color: '#1443C3',
+    },
+    containerCheckbox: {
+        width: '90%',
+        flexDirection: 'row',
+        margin: 20,
+    },
+    checkbox: {
+        width: 20,
+        height: 20,
+        marginRight: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    checkboxChecked: {
+        width: 18,
+        height: 18,
+    },
+    checkboxUnchecked: {
+        borderWidth: 1,
+        borderColor: '#12ae97',
+        width: 18,
+        height: 18,
+        backgroundColor: '#FFF',
+    },
+    label: {
+        fontFamily: 'SF Pro Display',
+        fontSize: 14,
+        fontWeight: 400,
+        alignContent:'center',
+    },
+
+    login_btn: {
+        backgroundColor: '#1443C3',
+        borderRadius: 50,
+        width: '100%',
+        paddingVertical: 15.5,
+        marginTop: 16,
+    },
+    login_text: {
+        fontFamily: 'SF Pro Display',
+        fontSize: 16,
+        fontWeight: 500,
+        textAlign: 'center',
+        color: '#FEFEFE',
+    },
+    link_container:{
+        flexDirection:'row',
+        marginTop:40,
+        alignItems:'center',
+    },
+    link_text:{
+        fontFamily: 'SF Pro Display',
+		fontSize: 14,
+		fontWeight: 400,
+		color: ' #191D23',
+    },
+    link_text_blue:{
+        color:'#1443C3',
+        fontFamily: 'SF Pro Display',
+		fontSize: 14,
+		fontWeight: 400,
     }
 })
