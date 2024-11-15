@@ -1,6 +1,6 @@
 import { Text, View, StyleSheet, TouchableOpacity, TextInput } from "react-native";
 import Google from '../assets/images/google';
-import Eye from '../assets/images/eyeSlash';
+// import Eye from '../assets/images/eyeSlash';
 import { useState } from 'react'
 import { Link } from "expo-router";
 import Shape from '../assets/images/shape'
@@ -30,7 +30,7 @@ export default function LogIn() {
             <View style={styles.inp_wrapper}>
                 <View style={styles.text_block}>
                     <Text style={styles.text_inp}>Password</Text>
-                    <Text style={styles.text_pwd}>Forgot Password</Text>
+                   <Link href={"/forgotPassword"}><Text style={styles.text_pwd}>Forgot Password</Text></Link> 
                 </View>
                 <TextInput style={styles.inp} placeholder='Password' secureTextEntry={true} placeholderTextColor={'#BABABA'}></TextInput>
                 <View style={styles.containerCheckbox}>
