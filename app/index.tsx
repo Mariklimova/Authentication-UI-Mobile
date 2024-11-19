@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, TouchableOpacity, TextInput } from "react-native";
+import { Text, View, StyleSheet, TouchableOpacity, TextInput, NativeEventEmitter } from "react-native";
 import Google from '../assets/images/google';
 // import Eye from '../assets/images/eyeSlash';
 import { useState } from 'react'
@@ -8,7 +8,15 @@ import Shape from '../assets/images/shape'
 
 export default function LogIn() {
 
+    const [valueInp, setValueInp] = useState({
+        email: '',
+        password: ''
+    });
     const [flag, setFlag] = useState(false)
+
+    const changeValue = (e: any,str:string) => {
+        setValueInp({ ...valueInp, [str]: e.nativeEvent.text })
+    }
 
     return <>
         <View style={styles.wrapper}>
@@ -25,27 +33,27 @@ export default function LogIn() {
             </View>
             <View style={styles.inp_wrapper}>
                 <Text style={styles.text_inp}>Email Addess</Text>
-                <TextInput style={styles.inp} placeholder={'Rhebhek@gmail.com'} placeholderTextColor={'#BABABA'}></TextInput>
+                <TextInput style={styles.inp} placeholder={'Rhebhek@gmail.com'} placeholderTextColor={'#BABABA'} onChange={(e)=>changeValue(e,'email')}></TextInput>
             </View>
             <View style={styles.inp_wrapper}>
                 <View style={styles.text_block}>
-                    <Text style={styles.text_inp}>Password</Text>
-                   <Link href={"/forgotPassword"}><Text style={styles.text_pwd}>Forgot Password</Text></Link> 
+                    <Text style={styles.text_inp} >Password</Text>
+                    <Link href={"/forgotPassword"}><Text style={styles.text_pwd} >Forgot Password</Text></Link>
                 </View>
-                <TextInput style={styles.inp} placeholder='Password' secureTextEntry={true} placeholderTextColor={'#BABABA'}></TextInput>
+                <TextInput style={styles.inp} placeholder='Password' secureTextEntry={true} placeholderTextColor={'#BABABA'} onChange={(e)=>changeValue(e,'password')}></TextInput>
                 <View style={styles.containerCheckbox}>
-                <TouchableOpacity onPress={() => setFlag(!flag)} style={styles.checkbox}>
-                    {flag ? <Shape style={styles.checkboxChecked}></Shape> : <View style={styles.checkboxUnchecked} />}
-                </TouchableOpacity>
-                <Text style={styles.label}>Keep me signed in</Text>
-            </View>
-                <TouchableOpacity style={styles.login_btn}>
+                    <TouchableOpacity onPress={() => setFlag(!flag)} style={styles.checkbox}>
+                        {flag ? <Shape style={styles.checkboxChecked}></Shape> : <View style={styles.checkboxUnchecked} />}
+                    </TouchableOpacity>
+                    <Text style={styles.label}>Keep me signed in</Text>
+                </View>
+                <TouchableOpacity style={styles.login_btn} onPress={() => console.log(valueInp)}>
                     <Text style={styles.login_text}>Login</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.link_container}>
-            <Text style={styles.link_text}>Don’t have an Account?</Text>
-            <Link href={'/signup'}><Text style={styles.link_text_blue}>Sign up here</Text></Link>
+                <Text style={styles.link_text}>Don’t have an Account?</Text>
+                <Link href={'/signup'}><Text style={styles.link_text_blue}>Sign up here</Text></Link>
             </View>
         </View>
     </>
@@ -161,7 +169,7 @@ const styles = StyleSheet.create({
         fontFamily: 'SF Pro Display',
         fontSize: 14,
         fontWeight: 400,
-        alignContent:'center',
+        alignContent: 'center',
     },
 
     login_btn: {
@@ -178,21 +186,21 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: '#FEFEFE',
     },
-    link_container:{
-        flexDirection:'row',
-        marginTop:40,
-        alignItems:'center',
+    link_container: {
+        flexDirection: 'row',
+        marginTop: 40,
+        alignItems: 'center',
     },
-    link_text:{
+    link_text: {
         fontFamily: 'SF Pro Display',
-		fontSize: 14,
-		fontWeight: 400,
-		color: ' #191D23',
+        fontSize: 14,
+        fontWeight: 400,
+        color: ' #191D23',
     },
-    link_text_blue:{
-        color:'#1443C3',
+    link_text_blue: {
+        color: '#1443C3',
         fontFamily: 'SF Pro Display',
-		fontSize: 14,
-		fontWeight: 400,
+        fontSize: 14,
+        fontWeight: 400,
     }
 })

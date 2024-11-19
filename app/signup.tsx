@@ -6,8 +6,28 @@ import { Link } from 'expo-router';
 
 
 export default function singup() {
-    const [flag, setFlag] = useState(true)
+    const [flag, setFlag] = useState(true);
+    const [valueInp, setValueInp] = useState({
+        email:'',
+        name:'',
+        pwd:'',
+        repeatPwd:''
+    });
 
+    const getValueInp = (e: any, id: string) => {
+        setValueInp({...valueInp, [id]: e.nativeEvent.text});
+    }
+
+    const checkEmail=()=>{
+        try {
+            if(!/^\w+@[a-z]+\.[a-z]{2,5}/gm.test(valueInp.email))throw new Error('this email invalid');
+            console.log(valueInp);
+            
+        } catch (error:any) {
+            console.log(error.message);
+            
+        }
+    }
     return (
         <View style={styles.wrapper}>
             <Text style={styles.textLogin}>Singup</Text>
@@ -26,24 +46,24 @@ export default function singup() {
                 <View style={styles.wrapperInput}>
                     <View style={styles.inpAndTitle}>
                         <Text style={styles.title}>Full Name</Text>
-                        <TextInput placeholder='Becca Ade' placeholderTextColor={'#BABABA'} style={styles.inp}></TextInput>
+                        <TextInput placeholder='Becca Ade' placeholderTextColor={'#BABABA'} style={styles.inp} onChange={(e) =>getValueInp(e,'name')}></TextInput>
                     </View>
 
                     <View style={styles.inpAndTitle}>
                         <Text style={styles.title}>Email Addess</Text>
-                        <TextInput placeholder='Email' placeholderTextColor={'#BABABA'} style={styles.inp}></TextInput>
+                        <TextInput placeholder='Email' placeholderTextColor={'#BABABA'} style={styles.inp} onChange={(e) =>getValueInp(e,'email')}></TextInput>
                     </View>
                     <View style={styles.inpAndTitle}>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                             <Text style={styles.title}>Password</Text>
                         </View>
-                        <TextInput placeholder='Password' secureTextEntry={true} placeholderTextColor={'#BABABA'} style={styles.inp}></TextInput>
+                        <TextInput placeholder='Password' secureTextEntry={true} placeholderTextColor={'#BABABA'} style={styles.inp} onChange={(e) =>getValueInp(e,'pwd')}></TextInput>
                     </View>
                     <View style={styles.inpAndTitle}>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                             <Text style={styles.title}>Confirm Password</Text>
                         </View>
-                        <TextInput placeholder='Confirm Password' secureTextEntry={true} placeholderTextColor={'#BABABA'} style={styles.inp}></TextInput>
+                        <TextInput placeholder='Confirm Password' secureTextEntry={true} placeholderTextColor={'#BABABA'} style={styles.inp} onChange={(e) =>getValueInp(e,'repeatPwd')}></TextInput>
                     </View>
                 </View>
             </View>
@@ -54,7 +74,7 @@ export default function singup() {
                     </TouchableOpacity>
                     <Text style={styles.label}>By Creating an Account, i accept Hiring Hub terms of Use and Privacy Policy</Text>
                 </View>
-                <TouchableOpacity style={styles.btnLogin}>
+                <TouchableOpacity style={styles.btnLogin} onPress={checkEmail}>
                     <Text style={styles.buttonText}>Signup</Text>
                 </TouchableOpacity>
             </View>
@@ -96,8 +116,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#F4F7FF',
         alignItems: 'center',
         justifyContent: 'center',
-        flexDirection:'row',
-        gap:5,
+        flexDirection: 'row',
+        gap: 5,
     },
     wrapperSingIn: {
         width: '90%',
