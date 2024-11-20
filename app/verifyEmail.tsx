@@ -1,7 +1,23 @@
 import { Link } from "expo-router";
 import { Text, View, StyleSheet, TouchableOpacity, TextInput } from "react-native";
+import { useState,useRef } from "react";
 
 export default function verifyEmail() {
+
+    const [inpVal, setInpVal] = useState(['', '', '', '', '', '']);
+    const inputs = useRef<(TextInput | null)[]>([])
+
+    const changeText = (text: any, index: any) => {
+        let newInpVal = [...inpVal];
+        newInpVal[index] = text;
+        setInpVal(newInpVal);
+        if (text && index < 5) inputs.current[index + 1]?.focus();
+    };
+
+    const pressKey = (e: any, index: any) => {
+        if (e.nativeEvent.key === 'Backspace' && index > 0 && !inpVal[index]) inputs.current[index - 1]?.focus();
+    };
+
     return <>
         <View style={styles.wrapper}>
             <View style={styles.title_container}>
@@ -10,12 +26,19 @@ export default function verifyEmail() {
             <View style={styles.inp_wrapper}>
                 <Text style={styles.text_inp}>Enter Code</Text>
                 <View style={styles.inp_container}>
-                    <TextInput style={styles.inp} placeholder={'-'}></TextInput>
-                    <TextInput style={styles.inp} placeholder={'-'}></TextInput>
-                    <TextInput style={styles.inp} placeholder={'-'}></TextInput>
-                    <TextInput style={styles.inp} placeholder={'-'}></TextInput>
-                    <TextInput style={styles.inp} placeholder={'-'}></TextInput>
-                    <TextInput style={styles.inp} placeholder={'-'}></TextInput>
+                     {inpVal.map((item, index) => (
+                                <TextInput
+                                    key={index}
+                                    ref={ref => inputs.current[index] = ref}
+                                    style={styles.inp}
+                                    placeholder='-'
+                                    placeholderTextColor={'#BABABA'}
+                                    maxLength={1}
+                                    value={item}
+                                    onChangeText={text => changeText(text, index)}
+                                    onKeyPress={e => pressKey(e, index)}
+                                    keyboardType="numeric"
+                                />))}
                 </View>
             </View>
             <View style={{ width: '100%', marginVertical: 40 }}>

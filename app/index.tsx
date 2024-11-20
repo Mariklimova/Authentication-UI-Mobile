@@ -47,9 +47,9 @@ export default function LogIn() {
                     </TouchableOpacity>
                     <Text style={styles.label}>Keep me signed in</Text>
                 </View>
-                <TouchableOpacity style={styles.login_btn} onPress={() => console.log(valueInp)}>
-                    <Text style={styles.login_text}>Login</Text>
-                </TouchableOpacity>
+                <Link href={'/verifyEmail'}><TouchableOpacity style={styles.login_btn} onPress={() => console.log(valueInp)}>
+                <Text style={styles.login_text}>Login</Text>
+                </TouchableOpacity></Link>
             </View>
             <View style={styles.link_container}>
                 <Text style={styles.link_text}>Don’t have an Account?</Text>
