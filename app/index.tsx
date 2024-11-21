@@ -20,7 +20,7 @@ export default function LogIn() {
 
     return <>
         <View style={styles.wrapper}>
-            <Text style={styles.title}>Log In</Text>
+            <Text style={styles.title}>LogIn</Text>
             <TouchableOpacity style={styles.btn_google}>
                 <Google></Google>
                 <Text style={styles.btn_text}>Sign in with Google</Text>
@@ -68,9 +68,8 @@ const styles = StyleSheet.create({
         paddingHorizontal: 28,
     },
     title: {
-        fontFamily: 'SF Pro Display',
-        fontSize: 24,
-        fontWeight: 700,
+        fontFamily: 'RobotoBold',
+        fontSize: 26,
         color: '#191D23',
         marginBottom: 72,
     },
@@ -86,9 +85,8 @@ const styles = StyleSheet.create({
     },
     btn_text: {
         textAlign: 'center',
-        fontFamily: 'SF Pro Display',
-        fontSize: 14,
-        fontWeight: 500,
+        fontFamily: 'RobotoMedium',
+        fontSize: 16,
         color: '#131212',
 
     },
@@ -106,9 +104,8 @@ const styles = StyleSheet.create({
         width: '30%'
     },
     sign_text: {
-        fontFamily: 'SF Pro Display',
-        fontSize: 14,
-        fontWeight: 500,
+        fontFamily: 'RobotoMedium',
+        fontSize: 16,
         color: '#4B5768',
     },
     inp_wrapper: {

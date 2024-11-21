@@ -7,10 +7,9 @@ import { useEffect } from 'react';
 
 export default function RootLayout() {
   const [loaded] = useFonts({
-    // RobotoBold: require('../assets/fonts/Roboto-Bold.ttf'),
-    // RobotoLight: require('../assets/fonts/Roboto-Light.ttf'),
-    // RobotoMedium: require('../assets/fonts/Roboto-Medium.ttf'),
-    // RobotoRegular: require('../assets/fonts/Roboto-Regular.ttf'),
+    RobotoBold: require('../assets/fonts/Roboto-Bold.ttf'),
+    RobotoMedium: require('../assets/fonts/Roboto-Medium.ttf'),
+    RobotoRegular: require('../assets/fonts/Roboto-Regular.ttf'),
   });
 
   useEffect(() => {
