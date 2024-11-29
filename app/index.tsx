@@ -44,7 +44,7 @@ export default function LogIn() {
                 </View>
                 <TextInput style={styles.inp} placeholder='********' secureTextEntry={true} placeholderTextColor={'#BABABA'} onChange={(e) => changeValue(e, 'password')}></TextInput>
 
-                <View style={styles.containerCheckbox}>
+                <View style={{ width: '90%', flexDirection: 'row', marginVertical: 20 }}>
                     <TouchableOpacity onPress={() => setFlag(!flag)} style={styles.checkbox}>
                         {flag ? <Shape style={{ width: 18, height: 18, }}></Shape> : <View style={styles.checkboxUnchecked} />}
                     </TouchableOpacity>
@@ -52,7 +52,7 @@ export default function LogIn() {
                 </View>
 
                 <Link href={'/verifyEmail'}><TouchableOpacity style={styles.login_btn} onPress={() => console.log(valueInp)}>
-                    <Text style={styles.login_text}>Login</Text>
+                    <Text style={{ fontFamily: 'RobotoMedium', fontSize: 16, textAlign: 'center', color: '#FEFEFE', }}>Login</Text>
                 </TouchableOpacity></Link>
             </View>
 
@@ -94,11 +94,6 @@ const styles = StyleSheet.create({
         padding: 12,
         borderRadius: 6,
     },
-    containerCheckbox: {
-        width: '90%',
-        flexDirection: 'row',
-        margin: 20,
-    },
     checkbox: {
         width: 20,
         height: 20,
@@ -120,12 +115,6 @@ const styles = StyleSheet.create({
         paddingVertical: 15.5,
         marginTop: 16,
         marginBottom: 40,
-    },
-    login_text: {
-        fontFamily: ' RobotoMedium',
-        fontSize: 16,
-        textAlign: 'center',
-        color: '#FEFEFE',
     },
     link_text: {
         fontFamily: 'RobotoRegular',
