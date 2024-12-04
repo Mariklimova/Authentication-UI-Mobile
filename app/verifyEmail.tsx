@@ -1,6 +1,6 @@
 import { Link } from "expo-router";
 import { Text, View, StyleSheet, TouchableOpacity, TextInput } from "react-native";
-import { useState,useRef } from "react";
+import { useState, useRef } from "react";
 
 export default function verifyEmail() {
 
@@ -19,36 +19,49 @@ export default function verifyEmail() {
     };
 
     return <>
-        <View style={styles.wrapper}>
-            <View style={styles.title_container}>
-                <Text style={styles.title}>Please verify your email address</Text>
-                <Text style={styles.text}>We’ve sent an email to becca@gmail.com, please enter the code below.</Text>            </View>
-            <View style={styles.inp_wrapper}>
-                <Text style={styles.text_inp}>Enter Code</Text>
-                <View style={styles.inp_container}>
-                     {inpVal.map((item, index) => (
-                                <TextInput
-                                    key={index}
-                                    ref={ref => inputs.current[index] = ref}
-                                    style={styles.inp}
-                                    placeholder='-'
-                                    placeholderTextColor={'#BABABA'}
-                                    maxLength={1}
-                                    value={item}
-                                    onChangeText={text => changeText(text, index)}
-                                    onKeyPress={e => pressKey(e, index)}
-                                    keyboardType="numeric"
-                                />))}
+        <View style={{ backgroundColor: '#ffffff', flex: 1, alignItems: 'center', paddingHorizontal: 28, }}>
+
+            <View style={{ justifyContent: 'flex-start', marginTop: 32, marginBottom: 68, gap: 12, }}>
+
+                <Text style={{ fontFamily: 'RobotoMedium', fontSize: 24, color: '#191D23', }}>Please verify your email address</Text>
+                <Text style={{ fontFamily: 'RobotoRegular', fontSize: 14, }}>We’ve sent an email to becca@gmail.com, please enter the code below.</Text>
+
+            </View>
+
+            <View style={{ justifyContent: 'flex-start', width: '100%', gap: 16, }}>
+
+                <Text style={{ fontFamily: 'RobotoBold', fontSize: 16, color: '#000000BF', }}>Enter Code</Text>
+
+                <View style={{ flexDirection: 'row', width: '100%', justifyContent: 'space-between', }}>
+                    {inpVal.map((item, index) => (
+                        <TextInput
+                            key={index}
+                            ref={ref => inputs.current[index] = ref}
+                            style={styles.inp}
+                            placeholder='-'
+                            placeholderTextColor={'#BABABA'}
+                            maxLength={1}
+                            value={item}
+                            onChangeText={text => changeText(text, index)}
+                            onKeyPress={e => pressKey(e, index)}
+                            keyboardType="numeric"
+                        />))}
                 </View>
             </View>
+
             <View style={{ width: '100%', marginVertical: 40 }}>
                 <TouchableOpacity style={styles.login_btn}>
-                    <Text style={styles.login_text}>Create acount</Text>
+                    <Text style={{ fontFamily: 'RobotoMedium', fontSize: 16, color: '#FEFEFE', }}>Create acount</Text>
                 </TouchableOpacity>
             </View>
-            <View style={styles.link_container}>
-                <Text style={styles.link_text}>Didn’t see your email?</Text>
-                <Link href={'/'}><Text style={styles.link_text_blue}>Resend</Text></Link>
+
+            <View style={{ flexDirection: 'row', gap: 8, }}>
+
+                <Text style={{ fontFamily: 'RobotoRegular', fontSize: 14, color: ' #191D23', alignContent: 'center', }}>
+                    Didn’t see your email?
+                </Text>
+                <Link href={'/'}><Text style={{ color: '#1443C3', fontFamily: 'RobotoRegular', fontSize: 14, }}>Resend</Text></Link>
+
             </View>
         </View>
     </>
@@ -56,46 +69,6 @@ export default function verifyEmail() {
 
 
 const styles = StyleSheet.create({
-    wrapper: {
-        backgroundColor: '#ffffff',
-        flex: 1,
-        alignItems: 'center',
-        paddingHorizontal: 28,
-    },
-    title_container: {
-        justifyContent: 'flex-start',
-        marginTop: 32,
-        marginBottom: 68,
-    },
-    title: {
-        fontFamily: 'SF Pro Display',
-        fontSize: 24,
-        fontWeight: 500,
-        color: '#191D23',
-        marginBottom: 12,
-        textAlign: 'left',
-    },
-    text: {
-        fontFamily: 'SF Pro Display',
-        fontSize: 14,
-        fontWeight: 400,
-    },
-    inp_wrapper: {
-        justifyContent: 'flex-start',
-        width: '100%',
-        gap: 16,
-    },
-    text_inp: {
-        fontFamily: 'SF Pro Display',
-        fontSize: 16,
-        fontWeight: 700,
-        color: '#000000BF',
-    },
-    inp_container: {
-        flexDirection: 'row',
-        width: '100%',
-        justifyContent:'space-between',
-    },
     inp: {
         borderColor: '#CBD2E0',
         backgroundColor: '#FFFFFF',
@@ -112,33 +85,6 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         width: '100%',
         paddingVertical: 15.5,
+        alignItems: 'center'
     },
-    login_text: {
-        fontFamily: 'SF Pro Display',
-        fontSize: 16,
-        fontWeight: 500,
-        textAlign: 'center',
-        color: '#FEFEFE',
-    },
-    link_container: {
-        flexDirection: 'row',
-        alignItems: 'flex-start',
-        justifyContent: 'center',
-        gap: 8,
-    },
-    link_text: {
-        fontFamily: 'SF Pro Display',
-        fontSize: 14,
-        fontWeight: 400,
-        color: ' #191D23',
-        alignContent: 'center',
-        textAlign: 'left',
-    },
-    link_text_blue: {
-        color: '#1443C3',
-        fontFamily: 'SF Pro Display',
-        fontSize: 14,
-        fontWeight: 400,
-        alignContent: 'center',
-    }
 })
