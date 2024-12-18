@@ -24,11 +24,11 @@ export default function RootLayout() {
 
   return (
     <Stack screenOptions={{headerShown:false}}>
-      <Stack.Screen name="/"  />
-      <Stack.Screen name="/signup" />
+      <Stack.Screen name="index"  />
+      <Stack.Screen name="signup" />
       <Stack.Screen name="+not-found" />
-      <Stack.Screen name="/forgot-password" />
-      <Stack.Screen name="/verify-email" />
+      <Stack.Screen name="forgotPassword" />
+      <Stack.Screen name="verifyEmail" />
     </Stack>
 
   );

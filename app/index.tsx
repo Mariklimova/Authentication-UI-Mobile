@@ -1,6 +1,7 @@
 import { Text, View, StyleSheet, TouchableOpacity, TextInput } from "react-native";
 import Google from '../assets/images/google';
-// import Eye from '../assets/images/eyeSlash';
+import EyeCloused from '../assets/images/eyeSlash';
+import EyeOpen from '../assets/images/eyeOpen';
 import { useState } from 'react'
 import { Link } from "expo-router";
 import Shape from '../assets/images/shape'
@@ -12,7 +13,8 @@ export default function LogIn() {
         email: '',
         password: ''
     });
-    const [flag, setFlag] = useState(false)
+    const [flagCheck, setFlagCheck] = useState(false)
+    const [flagEye, setFlagEye] = useState(false)
 
     const changeValue = (e: any, str: string) => {
         setValueInp({ ...valueInp, [str]: e.nativeEvent.text })
@@ -42,11 +44,27 @@ export default function LogIn() {
                     <Text style={{ fontFamily: 'RobotoRegular', fontSize: 14, color: '#000000BF', }} >Password</Text>
                     <Link href={"/forgotPassword"}><Text style={{ fontFamily: 'RobotoRegular', fontSize: 14, color: '#1443C3' }} >Forgot Password</Text></Link>
                 </View>
-                <TextInput style={styles.inp} placeholder='********' secureTextEntry={true} placeholderTextColor={'#BABABA'} onChange={(e) => changeValue(e, 'password')}></TextInput>
+
+                <View style={{ position: 'relative' }}>
+
+                    <TextInput
+                        style={styles.inp}
+                        placeholder='********'
+                        secureTextEntry={!flagEye}
+                        placeholderTextColor={'#BABABA'}
+                        onChange={(e) => changeValue(e, 'password')}>
+                    </TextInput>
+
+                    <TouchableOpacity
+                        style={{ position: 'absolute', right: 10, top: 10 }}
+                        onPress={() => setFlagEye(!flagEye)}>
+                        {flagEye ? <EyeOpen style={{ width: 20, height: 20 }} /> : <EyeCloused style={{ width: 20, height: 20 }} />}
+                    </TouchableOpacity>
+                </View>
 
                 <View style={{ width: '90%', flexDirection: 'row', marginVertical: 20 }}>
-                    <TouchableOpacity onPress={() => setFlag(!flag)} style={styles.checkbox}>
-                        {flag ? <Shape style={{ width: 18, height: 18, }}></Shape> : <View style={styles.checkboxUnchecked} />}
+                    <TouchableOpacity onPress={() => setFlagCheck(!flagCheck)} style={styles.checkbox}>
+                        {flagCheck ? <Shape style={{ width: 18, height: 18, }}></Shape> : <View style={styles.checkboxUnchecked} />}
                     </TouchableOpacity>
                     <Text style={{ fontFamily: 'RobotoRegular', fontSize: 14, alignContent: 'center', }}>Keep me signed in</Text>
                 </View>
