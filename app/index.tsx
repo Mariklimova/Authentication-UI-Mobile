@@ -5,7 +5,7 @@ import EyeOpen from '../assets/images/eyeOpen';
 import { useState } from 'react'
 import { Link } from "expo-router";
 import Shape from '../assets/images/shape'
-
+import Exclamatory from '../assets/images/exclamatory'
 
 export default function LogIn() {
 
@@ -14,10 +14,22 @@ export default function LogIn() {
         password: ''
     });
     const [flagCheck, setFlagCheck] = useState(false)
-    const [flagEye, setFlagEye] = useState(false)
+    const [flagEye, setFlagEye] = useState(false);
+    const [passwordError, setPasswordError] = useState('');
+
+    const validatePassword = (password: string) => {
+        if (password.length < 6) {
+            setPasswordError('Please enter correct password');
+        } else {
+            setPasswordError('');
+        }
+    }
 
     const changeValue = (e: any, str: string) => {
-        setValueInp({ ...valueInp, [str]: e.nativeEvent.text })
+        setValueInp({ ...valueInp, [str]: e.nativeEvent.text });
+        if (str === 'password') {
+            validatePassword(e.nativeEvent.text); 
+        }
     }
 
     return <>
@@ -61,6 +73,12 @@ export default function LogIn() {
                         {flagEye ? <EyeOpen style={{ width: 20, height: 20 }} /> : <EyeCloused style={{ width: 20, height: 20 }} />}
                     </TouchableOpacity>
                 </View>
+
+                {passwordError ?
+                    <View style={{ flexDirection: 'row', gap: 5, alignItems:'center', marginTop: 5 }}>
+                        <Exclamatory />
+                        <Text style={{ color: '#EA2A2A'}}>{passwordError}</Text>
+                    </View> : null}
 
                 <View style={{ width: '90%', flexDirection: 'row', marginVertical: 20 }}>
                     <TouchableOpacity onPress={() => setFlagCheck(!flagCheck)} style={styles.checkbox}>
